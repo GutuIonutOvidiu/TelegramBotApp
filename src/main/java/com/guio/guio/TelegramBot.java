@@ -9,10 +9,18 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class TelegramBot extends TelegramWebhookBot {
     private final String botUsername;
     private final String botToken;
-    public TelegramBot(String botUsername, String botToken) {
+    private boolean admin;
+
+    public TelegramBot(String botUsername, String botToken, boolean admin) {
+        this.admin = admin;
         this.botUsername = botUsername;
         this.botToken = botToken;
     }
+
+    public boolean isAdmin() {
+        return this.admin;
+    }
+
 
     @Override
     public BotApiMethod<?> onWebhookUpdateReceived(Update update) {

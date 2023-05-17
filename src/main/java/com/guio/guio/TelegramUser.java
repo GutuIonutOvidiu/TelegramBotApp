@@ -1,9 +1,6 @@
 package com.guio.guio;
-
 import jakarta.persistence.*;
-
 import java.util.List;
-
 @Entity
 @Table(name="telegramUser")
 public class TelegramUser {
@@ -32,6 +29,4 @@ public class TelegramUser {
         this.telegramToken = telegramToken;
         this.userName = userName;
     }
-
-
 }

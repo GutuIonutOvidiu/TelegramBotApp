@@ -1,12 +1,8 @@
 package com.guio.guio;
-
-
 import jakarta.persistence.*;
-
 @Entity
 @Table(name="task")
 public class Task {
-
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private final long id;
