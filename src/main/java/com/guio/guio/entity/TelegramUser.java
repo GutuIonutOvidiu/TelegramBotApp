@@ -1,14 +1,24 @@
-package com.guio.guio;
-import jakarta.persistence.*;
+package com.guio.guio.entity;
+
+import javax.persistence.*;
 import java.util.List;
 @Entity
 @Table(name="telegramUser")
 public class TelegramUser {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private final Long id;
+    private Long id;
     @Column(name="firstName")
     private   String firstName;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
     @Column(name="secondName")
     private   String secondName;
     @Column(name="userName",unique = true)
@@ -21,12 +31,14 @@ public class TelegramUser {
     @OneToMany(mappedBy = "asignee")
     private List<Task> my_task;
 
-    public TelegramUser(Long id, String firstName, String secondName, String emailAdress, String telegramToken, String userName) {
-        this.id = id;
+    public TelegramUser(String firstName, String secondName, String userName,String emailAdress, String telegramToken) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.emailAdress = emailAdress;
         this.telegramToken = telegramToken;
         this.userName = userName;
     }
+
+
+
 }

@@ -1,5 +1,6 @@
-package com.guio.guio;
-import jakarta.persistence.*;
+package com.guio.guio.entity;
+
+import javax.persistence.*;
 import java.util.List;
 @Entity
 @Table(name="toDoList")

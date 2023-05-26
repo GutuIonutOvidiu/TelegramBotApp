@@ -1,28 +1,31 @@
-package com.guio.guio;
-import jakarta.persistence.*;
+package com.guio.guio.entity;
+
+
+import javax.persistence.*;
+
 @Entity
 @Table(name="task")
 public class Task {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private final long id;
 
-    @Column(name="description")
+    @Column(name = "description")
     private final String description;
 
-    @Column(name="taskDone")
+    @Column(name = "taskDone")
     private boolean taskDone = false;
 
     @ManyToOne
-    @JoinColumn(name="list_id")
+    @JoinColumn(name = "list_id")
     private TodoList todoList;
 
     @ManyToOne
-    @JoinColumn(name="asignee_id")
+    @JoinColumn(name = "asignee_id")
     private TelegramUser asignee;
 
     @ManyToOne
-    @JoinColumn(name="reporter_id")
+    @JoinColumn(name = "reporter_id")
     private TelegramUser reporter;
 
     public Task(long id, String description, boolean taskDone) {
