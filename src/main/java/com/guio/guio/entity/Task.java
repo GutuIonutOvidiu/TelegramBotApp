@@ -1,7 +1,7 @@
 package com.guio.guio.entity;
 
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="task")

@@ -1,6 +1,6 @@
 package com.guio.guio.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 @Entity
 @Table(name="telegramUser")
@@ -28,15 +28,19 @@ public class TelegramUser {
     @Column(name="telegramToken",unique = true)
     private final  String telegramToken;
 
+    @Column(name="isAdmin",unique = true)
+    private  Boolean isAdmin;
+
     @OneToMany(mappedBy = "asignee")
     private List<Task> my_task;
 
-    public TelegramUser(String firstName, String secondName, String userName,String emailAdress, String telegramToken) {
+    public TelegramUser(String firstName, String secondName, String userName,String emailAdress, String telegramToken,Boolean isAdmin) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.emailAdress = emailAdress;
         this.telegramToken = telegramToken;
         this.userName = userName;
+        this.isAdmin=isAdmin;
     }
 
 

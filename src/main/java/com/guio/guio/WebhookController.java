@@ -22,9 +22,6 @@ public class WebhookController {
 //    private Map<Long, String> userCallbackDataMap;
 
     @Autowired
-    private TelegramUserService telegramUserService;
-
-    @Autowired
     private TelegramBotService telegramBotService;
 
     @PostMapping("/{botToken}")
@@ -63,12 +60,16 @@ public class WebhookController {
         message.setChatId(chatId);
         String[] userDetalis = update.getMessage().getText().split(" ");
         if (userDetalis.length == 5) {
-            this.telegramBotService.addBot(userDetalis[2], userDetalis[4], false);
-            this.telegramUserService.addUser(new TelegramUser(userDetalis[0],userDetalis[1],userDetalis[2],userDetalis[3],userDetalis[4]));
-            message.setText("Congratulation you register a new user with this userName:" + userDetalis[2]);
             bot = telegramBotService.getBotByToken(botToken);
+            try{
+                this.telegramBotService.addBot(userDetalis[0],userDetalis[1],userDetalis[2],userDetalis[3], userDetalis[4], false);
+                message.setText("Congratulation you register a new user with this userName:" + userDetalis[2]);
 //            bot.execute(createButtonForUser(chatId));
-            bot.execute(message);
+                bot.execute(message);
+            }catch (Exception e){
+                message.setText("User can't be register");
+                bot.execute(message);
+            }
             return displayMenuAdmin(chatId);
         } else {
             message.setText("The format of date is incorect, pleas try enter just 5 date delimitated by one single space, you are insert " + userDetalis.length + "dates");
@@ -93,19 +94,11 @@ public class WebhookController {
                     return displayMenuNoAdim(chatId);
                 }
             case "Create new task":
-//                message.setChatId(chatId);
-//                String task = update.getMessage().getText();
-//                message.setText(task);
-//                this.button_event.put(botToken,ButtonEvent.CREATE_NEW_TASK);
-//                return message;
-
             case "Tasks in processing":
             case "Tasks canceled":
             case "Tasks completed":
             case "Raking user score":
             case "Group users":
-                message.setChatId(chatId);
-                createButtonForUser(chatId);
             default:
         }
         return null;
